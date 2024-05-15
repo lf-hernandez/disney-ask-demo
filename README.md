@@ -36,3 +36,17 @@ In order update the Lamda, simply run the update shell script:
 aws lambda update-function-code --function-name {FUNC_NAME} --zip-file fileb://dist/index.zip
 ```
 
+populating dynamodb
+Ensure the dynamodb instance is setup on AWS and run:
+
+```bash
+$npx esbuild --platform=node --bundle --outdir=dist --tsconfig=tsconfig.json etl.ts
+
+  dist/etl.js  1.5mb ⚠️
+
+⚡ Done in 106ms
+$node ./dist/etl.js
+initializing movie_facts table
+sending batch write request
+operation succeeded
+```
