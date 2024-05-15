@@ -1,4 +1,5 @@
-import { Handler } from 'aws-lambda';
+import { APIGatewayEvent, Context, Handler } from 'aws-lambda';
+import { DynamoDB } from 'aws-sdk';
 
 // source: https://pizzabottle.com/85902-disney-facts-blow-mind/
 const movieFacts = [
@@ -7,7 +8,10 @@ const movieFacts = [
 	"Bambi only uses 72 words throughout the entire film."
 ];
 
-export const handler: Handler = async () => {
+export const handler: Handler = async (event: APIGatewayEvent, context: Context) => {
+	console.log(`Event: ${JSON.stringify(event, null, 2)}`);
+	console.log(`Context: ${JSON.stringify(context, null, 2)}`);
+
 	const randomIndex = Math.floor(Math.random() * movieFacts.length);
 	const randomFact = movieFacts[randomIndex];
 
