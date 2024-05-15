@@ -1,0 +1,19 @@
+{
+  "name": "disney-ask-demo",
+  "version": "1.0.0",
+  "description": "This demo app showcases Alexa Skills Kit running againts a Node.js backend via AWS Lambda functions in conjuction with DynamoDB for data storage. You will be able to ask alexa for trivia about your favorite disney character.",
+  "main": "index.js",
+  "scripts": {
+    "typecheck": "tsc -noEmit",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.137",
+    "typescript": "^5.4.5"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.1620.0"
+  }
+}
