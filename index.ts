@@ -30,6 +30,6 @@ export const handler: Handler = async (event: APIGatewayEvent, context: Context)
         };
     } catch (error) {
         console.log(`operation failed\nerror:${error}`);
-        return { statusCode: 500, body: 'failed to return facts' };
+        return { statusCode: 500, body: `failed to return facts\n${error}` };
     }
 };
