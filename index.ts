@@ -1,35 +1,34 @@
-import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
-import { DynamoDBDocumentClient, ScanCommand } from '@aws-sdk/lib-dynamodb';
-import { APIGatewayEvent, Context, Handler } from 'aws-lambda';
+import { Skill, SkillBuilders } from 'ask-sdk-core';
+import { Handler } from 'aws-lambda';
 
-const client = new DynamoDBClient({});
-const docClient = DynamoDBDocumentClient.from(client);
+import {
+    AskDisneyMovieFactsIntentHandler,
+    CancelAndStopIntentHandler,
+    CustomErrorHandler,
+    HelpIntentHandler,
+    LaunchRequestHandler,
+    SessionEndedRequestHandler,
+} from './askHandlers';
 
-export const handler: Handler = async (event: APIGatewayEvent, context: Context) => {
-    console.log(`Event: ${JSON.stringify(event, null, 2)}`);
-    console.log(`Context: ${JSON.stringify(context, null, 2)}`);
+let skill: Skill;
 
-    const command = new ScanCommand({
-        ProjectionExpression: '#N, #F',
-        ExpressionAttributeNames: { '#N': 'movie_name', '#F': 'movie_fact' },
-        TableName: 'movie_facts',
-    });
-
-    try {
-        const response = await docClient.send(command);
-        if (response.Items) {
-            return {
-                statusCode: 200,
-                body: JSON.stringify(response.Items),
-            };
-        }
-
-        return {
-            statusCode: 200,
-            body: 'empty dataset',
-        };
-    } catch (error) {
-        console.log(`operation failed\nerror:${error}`);
-        return { statusCode: 500, body: `failed to return facts\n${error}` };
+export const handler: Handler = async (event, context) => {
+    console.log(`REQUEST++++${JSON.stringify(event)}`);
+    if (!skill) {
+        skill = SkillBuilders.custom()
+            .addRequestHandlers(
+                LaunchRequestHandler,
+                AskDisneyMovieFactsIntentHandler,
+                HelpIntentHandler,
+                CancelAndStopIntentHandler,
+                SessionEndedRequestHandler
+            )
+            .addErrorHandlers(CustomErrorHandler)
+            .create();
     }
+
+    const response = await skill.invoke(event, context);
+    console.log(`RESPONSE++++${JSON.stringify(response)}`);
+
+    return response;
 };

@@ -16,9 +16,9 @@ Deploy:
 npm run build
 ```
 
-This transpiles the TypeScript files and bundles the package and it's dependencies into a single JavaScript file, the postbuild cleanup step compresses the package into a zip file.
+This transpiles the TypeScript files and bundles the package and it's dependencies into a single JavaScript file, the post-build cleanup step compresses the package into a zip file.
 
-From here you can run the deploy script which essentally creates the Lambda with a configured runtime and execution role:
+From here you can run the deploy script which essentially creates the Lambda with a configured runtime and execution role:
 
 ```bash
 ./deploy.sh
@@ -28,7 +28,7 @@ aws lambda create-function --function-name {FUNC_NAME} --runtime "nodejs20.x" --
 
 Update:
 
-In order update the Lamda, simply run the update shell script:
+In order update the Lambda, simply run the update shell script:
 
 ```bash
 ./update.sh
