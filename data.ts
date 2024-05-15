@@ -3,6 +3,8 @@ export type MovieFactData = {
     movieName: string;
     movieFact: string;
 };
+
+// source: https://pizzabottle.com/85902-disney-facts-blow-mind/
 export const movieFacts: Array<Partial<MovieFactData>> = [
     {
         movieName: 'The Lion King',
