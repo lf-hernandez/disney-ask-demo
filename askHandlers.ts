@@ -8,13 +8,13 @@ export const LaunchRequestHandler: RequestHandler = {
         return request.type === 'LaunchRequest';
     },
     handle(handlerInput: HandlerInput): Response {
-        const speechText = 'Welcome to your hey Disney demo skill. Ask me for a Disney movie fact!';
+        const speechText = 'Welcome to the unofficial Disney movie facts demo skill. Ask me for a Disney movie fact!';
 
         return handlerInput.responseBuilder
             .speak(speechText)
             .reprompt(speechText)
             .withSimpleCard(
-                'Welcome to your hey Disney demo skill. Ask me for a Disney movie fact!',
+                'Welcome to the unofficial Disney movie facts demo skill. Ask me for a Disney movie fact!',
                 speechText
             )
             .getResponse();
@@ -98,8 +98,7 @@ export const SessionEndedRequestHandler: RequestHandler = {
     },
     handle(handlerInput: HandlerInput): Response {
         console.log(
-            `Session ended with reason: ${
-                (handlerInput.requestEnvelope.request as SessionEndedRequest).reason
+            `Session ended with reason: ${(handlerInput.requestEnvelope.request as SessionEndedRequest).reason
             }`
         );
 
