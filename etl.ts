@@ -55,3 +55,23 @@ export const fetchAllMovieFacts = async () => {
     }
     return null;
 };
+
+export const fetchSpecificMovieFact = async (specifiedMovie: string) => {
+    const command = new ScanCommand({
+        TableName: 'movie_facts',
+        FilterExpression: 'contains(#name, :name)',
+        ExpressionAttributeNames: { '#name': 'movie_name' },
+        ExpressionAttributeValues: {
+            ':name': specifiedMovie,
+        },
+    });
+
+    try {
+        const response = await docClient.send(command);
+        console.log(response);
+        return response;
+    } catch (error) {
+        console.log(error);
+    }
+    return null;
+};
