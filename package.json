@@ -16,7 +16,7 @@
     "@types/aws-lambda": "^8.10.137",
     "@types/uuid": "^9.0.8",
     "dotenv": "^16.4.5",
-    "esbuild": "^0.21.2",
+    "esbuild": "^0.25.0",
     "typescript": "^5.4.5"
   },
   "dependencies": {
